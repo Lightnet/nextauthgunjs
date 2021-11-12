@@ -8,7 +8,7 @@
 
 import { useState, useEffect } from 'react';
 //import Gun from '@/gun/gun';
-import Gun from 'gun/gun';
+import Gun from 'gun';
 
 export default function TestDB({props}){
 

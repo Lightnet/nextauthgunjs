@@ -14,9 +14,11 @@ function Page() {
 
   //console.log(process.env.customKey);
   useEffect(async()=>{
+    /*
     let db = await getDB();
     console.log("db====index================")
     console.log(db)
+    */
   },[])
 
   return (<>
@@ -26,7 +28,10 @@ function Page() {
     <Link href="/test"> Test </Link>
     <Sign></Sign>
     <GunGraph></GunGraph>
+    
   </>)
 }
-
 export default Page
+/*
+
+*/

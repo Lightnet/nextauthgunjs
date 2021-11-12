@@ -9,7 +9,8 @@
 import { useState, useEffect } from 'react';
 //import Gun from '@/gun/gun';
 //import Gun from 'gun/gun';
-import Gun from 'gun';
+//import Gun from '@gun';
+//var Gun = require('gun/gun');
 
 export default function TestDB({props}){
 
@@ -28,16 +29,17 @@ export default function TestDB({props}){
   //watch var gun change is set
   useEffect(() => {
     if((gun!=null)&&(isConnected==false) ){
+      /*
       gun.on('hi', peer => {//peer connect
         //console.log('connect peer to',peer);
         console.log('peer connect!');
         setIsConnected(true);
       });
-  
       gun.on('bye', (peer)=>{// peer disconnect
         //console.log('disconnected from', peer);
         console.log('disconnected from peer!');
       });
+      */
     }
   },[gun]);
 
@@ -54,18 +56,21 @@ export default function TestDB({props}){
   },[]);
 
   async function putDB(){
-    console.log("put");
-    console.log(gun);
-    gun.get('test').put({ "gun": "d" },function(ack){
-      console.log(ack)
+    let res = await fetch('api/gun?key=testkey',{
+      method:'POST',
+      body: JSON.stringify({hello:'world'})
     });
+    let data = await res.json();
+    console.log(data);
   }
 
   async function getDB(){
     console.log("get");
-    gun.get('test').get('gun').once((data) => {
-      console.log(data);
-    })
+    let res = await fetch('api/gun?key=testkey&value=hello',{
+      method:'GET'
+    });
+    let data = await res.json();
+    console.log(data);
   }
 
   async function listDB(){
@@ -73,11 +78,14 @@ export default function TestDB({props}){
   }
 
   function gunAPI(){
+    /*
     console.log("gun url?")
     let _gun = Gun('http://localhost:3000/api/restgun');
+    */
   }
 
   async function gunAPI(){
+
     console.log("gun url?")
     let rep = await fetch('api');
     let data = await rep.json();
@@ -89,14 +97,15 @@ export default function TestDB({props}){
       
       <button onClick={putDB}> Put </button>
       <button onClick={getDB}> Get </button>
-      <button onClick={listDB}> List </button>
-      <button onClick={gunAPI}> gun connect </button>
-
-      <button onClick={gunAPI}> gun put </button>
-      <button onClick={gunAPI}> gun get </button>
+      
     </div>
   </>)
 }
 /*
+<button onClick={listDB}> List </button>
+      <button onClick={gunAPI}> gun connect </button>
+
+      <button onClick={gunAPI}> gun put </button>
+      <button onClick={gunAPI}> gun get </button>
 <label>Test DB {data}</label>
 */

@@ -7,11 +7,12 @@
 //import TestDB from "../components/database/test";
 import Link from "next/link";
 import { useEffect } from "react";
-import getDB from "../lib/getDB";
+//import getDB from "../lib/getDB";
 
 function Page() {
 
   useEffect(async() => {
+    /*
     let db = await getDB();
     console.log("db====================")
     console.log(db);
@@ -20,7 +21,7 @@ function Page() {
     }else{
       db.setText('beta');
     }
-    
+    */
   }, []);
 
   return (<>
@@ -32,3 +33,7 @@ function Page() {
 }
 
 export default Page
+/*
+
+
+*/

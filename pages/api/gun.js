@@ -7,18 +7,54 @@
 // https://github.com/noctisatrae/gunpoint/blob/master/src/index.js
 // https://stackoverflow.com/questions/46831742/how-to-use-gun-as-an-express-route
 
-import Gun from "gun";
+//import Gun from "gun";
 
 export const config = {
   api: {
-    bodyParser: false,
+    bodyParser: true,
   },
 };
 
-var gun;
+//var gun;
+
+import gun from "../../lib/database";
 
 export default async (req, res)=>{
+  
+  console.log('API GUN');
+  console.log('method',req.method);
+  let test = gun.get('test');
+  //console.log(req.params);
+  //console.log(req.path);
+  console.log(req.query);
+  console.log(req.body);
 
+  if(req.method == 'GET'){
+    //console.log(req.params);
+    const { key, value } = req.query;
+    if(key !=null && value != null ){
+      test.get(key).get(value).once(function(ack){
+        console.log("tests.....")
+        console.log(ack);
+      })
+    }
+  }
+
+  if(req.method == 'POST'){
+    console.log('POST?')
+    console.log(req.body);
+    const { key } = req.query;
+    if(key){
+      let data = JSON.parse(req.body);
+      test.get(key).put(data,function(ack){
+        console.log(ack.ok);
+      })
+    }
+  }
+  
+  res.json({message:'ERROR'});
+  //res.end();
+  /*
   if (!res.socket.server.gun) {
     console.log("SETUP GUN");
     gun = Gun({
@@ -48,9 +84,6 @@ export default async (req, res)=>{
 
     res.socket.server.gun = gun;
   }
-
-  console.log('restgun');
-  console.log('method',req.method);
-
-  res.end();
+  */
+  
 };

@@ -4,7 +4,7 @@
 */
 
 import { getCsrfToken, getProviders } from "next-auth/react";
-import gun,{createUser,verifyUser} from "../../lib/database";
+import {createUser,verifyUser} from "../../lib/database";
 
 export default async (req, res)=>{
   console.log("[[[=== SIGN IN ===]]]");

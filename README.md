@@ -21,9 +21,20 @@ There are two way to run gun.
 
 ## notes:
 - Current the new version for latest build or next 12.x that have few bugs.
+- client gun module dependency error
 
 # Links:
 - https://nextjs.org/docs/advanced-features/module-path-aliases
 
 # Credits:
 - https://github.com/noctisatrae/gunpoint
+
+
+.env
+```
+HOST="http://localhost:3000"
+NEXTAUTH_URL="http://localhost:3000"
+DATABASE_URL=""
+SECRET="secret"
+PORT=4000
+```
